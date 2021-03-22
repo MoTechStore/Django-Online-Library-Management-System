@@ -1,0 +1,49 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid">
+        <div class="row">
+          <div class="col-12 mb-3">
+          <div class="col-12 mb-3">
+              <div id="content-wrapper">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="">book Title : {{ object.title }} </a>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table text-warning"></i>
+                    Details Of Book
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+ <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Book Title:</strong> {{ object.task_title }}</li>
+              <li class="list-group-item"><strong>Author :</strong> {{ object.author }}</li>
+              <li class="list-group-item"><strong>Description:</strong> {{ object.desc }}</li>
+              <li class="list-group-item"><strong>Uploded By :</strong> {{ object.uploaded_by }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row top-buffer" style="padding-top: 10px">
+        <div class="col-12">
+                <a href="{% url 'ambook' %}"><button type="button" class="btn btn-success">Back</button></a>
+        </div>
+    </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

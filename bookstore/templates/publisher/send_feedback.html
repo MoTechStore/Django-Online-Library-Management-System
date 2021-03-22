@@ -1,0 +1,91 @@
+{% extends 'publisher/base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-3" style="color: red">
+  <p style="color: blue"></p>  
+</div>
+
+
+
+<div class="col-sm-6" style="padding-top: 87px">
+    <div class="card">
+  <div class="card-header">
+          <i class="fas fa-table text-primary"></i>
+    Send Us Your Feedback About Our Service
+  </div>
+</div>
+
+
+<div class="card mb-4">
+<div class="card-body">
+
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="form-group">
+    <form action="{% url 'send_feedback' %}" method="POST">
+    {% csrf_token %}
+  <label for="comment">Type Below Your Feedback</label>
+  <textarea class="form-control" rows="5" id="comment" name="feedback"></textarea>
+  <br>
+  <a href=""><button type="submit" class="btn btn-primary"> Send</button></a>
+</form>
+
+<br>
+<br>
+   <div class="card-footer">
+        <div class="d-flex justify-content-center">
+
+<div style="color: blue">
+
+              {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+              </div>
+      </div>
+</div>
+
+	<div class="col-sm-4"></div>
+	</div>
+
+
+                      </div>
+                    </div>  
+                  </div>
+
+</div>
+
+
+
+<div class="col-sm-3" style="color: red">
+</div>
+
+</div>
+</div>
+
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

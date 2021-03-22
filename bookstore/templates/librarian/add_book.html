@@ -1,0 +1,60 @@
+{% extends 'librarian/base.html' %}
+{% load static %}
+
+
+{% block body %}
+<div class="col-md-8 col-sm-5 col-xs-5">
+<div id="content" class="p-6 p-md-5 pt-5">
+    <div class="col-md-12 col-sm-12 col-xs-10">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table text-primary"></i>
+                    Fill In Information Of Books
+                </div>
+                <div class="card-body">
+               <form action="{% url 'labook' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+        <div class="form-group">
+                <div class="col"><input type="text" class="form-control" name="title" placeholder="Book Title" required="required"></div>
+        </div>
+        <div class="form-group">
+                <div class="col"><input type="text" class="form-control" name="author" placeholder="Author" required="required"></div>                 
+        </div>
+
+         <div class="form-group">
+                <div class="col"><input type="text" class="form-control" name="publisher" placeholder="Publisher" required="required"></div>
+        </div>
+
+        <div class="form-group">
+                <div class="col"><input type="text" class="form-control" name="year" placeholder="Publication Year" required="required"></div>
+        </div>
+
+      <div class="form-group">
+                <div class="col"><input type="text" class="form-control" name="desc" placeholder="Book Description" required="required"></div>
+        </div>
+
+
+        <div class="form-group">
+                <div class="col"><label>Choose Book Cover</label>
+                    <input type="file" id="myFile" name="cover" placeholder="Report Attachment" enctype="multipart/form-data"></div>
+        </div>
+
+        <div class="form-group">
+                <div class="col"><label>Choose PDF Book</label>
+                    <input type="file" id="myFile" name="pdf" placeholder="Report Attachment" enctype="multipart/form-data"></div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" href="">Add Now</button>
+        </div>
+    </form>
+
+        </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

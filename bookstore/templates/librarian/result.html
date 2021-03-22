@@ -1,0 +1,161 @@
+{% extends 'librarian/base.html' %}
+{% block body %}
+
+
+<div class="container-fluid">
+<div class="row" style="padding-top: 30px">
+
+<div class="col-sm-1" style="color: red">
+</div>
+
+<div class="col-sm-10">
+            <div class="card mb-3">
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                   
+
+                        
+                        <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+            <a href="#">BookApp Search Results</a>
+      </li>
+</ol>
+
+
+                    {% if files %}
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Book Cover</th>
+                                <th>Book Title</th>
+                                <th>Publisher</th>
+                                <th>Read</th>
+                                <th>Download</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                                  {% for file in files %}
+
+                        
+                                <tr>
+                                  <td>{{ file.id }}</td>
+                                  <td>
+                                    {% if file.cover %}
+                                    <img src="{{ file.cover.url }}" alt="{{ file.title }}" style="width:100px; height: 100px">
+                                    {% else %}
+                                    <span class="text-muted">No cover</span>
+                                    {% endif %}
+                                   </td>
+
+                                  
+                                  <td>{{ file.title }}</td>
+                                  <td>{{ file.uploaded_by }}</td>
+
+
+                                    <td>
+                                    {% if file.pdf %}
+                                      <a href="{{ file.pdf.url }}" class="btn btn-outline-primary" target="_blank">
+                                    View PDF</a>
+                                    {% else %}
+                                    <span class="text-muted">No PDF</span>
+                                   {% endif %}
+                                  </td>
+                                    <td>
+                                    {% if file.cover %}
+                                      <a href="{{ file.pdf.url }}" download class="btn btn-outline-success">
+                                    Download PDF</a>
+                                    {% else %}
+                                   <span class="text-muted">No PDF</span>
+                                   {% endif %}
+                                  </td>
+
+        <td>
+          <a href="{% url 'ldbook' file.pk %}"><button type="button" class="btn btn-danger"> Delete</button></a></td>
+                                  
+                                </tr>
+
+                                <!-- end for and if -->
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                        {%else%}
+
+
+<center><h3 style="text-align:center; color:yellow; background: green; width: 600px" id="answer">No Search Found</h3></center>
+
+                <style type="text/css">
+                  #search_result {
+                 display: none;
+                 }
+    </style>
+
+                       {%endif%}    
+                            </tbody>
+                        </table>
+
+                        {% if files.has_other_pages %}
+    <ul class="pagination">
+        {% if files.has_previous %}
+            <li class="waves-effect"><a href="?page=
+                    {{ files.previous_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}"><i
+                    class="material-icons text-primary">&laquo;</i></a></li>
+        {% else %}
+            <li class="disabled"><a href="#!"><i class="material-icons text-primary">&laquo;</i></a></li>
+        {% endif %}
+        {% for num in files.paginator.page_range %}
+            {% if files.number == num %}
+                <li class="active"><a href="#!">{{ num }}</a></li>
+            {% else %}
+                <li class="waves-effect"><a
+                        href="?page={{ num }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if files.has_next %}
+            <li class="waves-effect"><a
+                    href="?page={{ files.next_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}"><i
+                    class="material-icons">&raquo;</i></a></li>
+        {% else %}
+            <li class="disabled"><a href="#!"><i class="material-icons">&raquo;</i></a></li>
+        {% endif %}
+    </ul>
+{% endif %}
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock body %}
+
+{% block extrascripts %}
+  <script type="text/javascript">
+  </script>
+{% endblock extrascripts %}
+
+
+
+
